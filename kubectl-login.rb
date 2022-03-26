@@ -6,10 +6,10 @@ class KubectlLogin < Formula
 
   if OS.mac?
     url "https://github.com/devopstales/kube-openid-connect/releases/download/client_v1.0/kubectl-login_osx.tar.gz"
-    sha256 "cd3f016366316622da0c264364b5ed473a880c0955dfcd8ae049c079555a91dc"
+    sha256 "0991c84f3ec568e4cc3c0a648f32194685552c045c8904b04b6ea2da0a0530f2"
   elsif OS.linux?
     url "https://github.com/devopstales/kube-openid-connect/releases/download/client_v1.0/kubectl-login_linux.tar.gz"
-    sha256 "ec644cb50645e510e639b8b54b887a090256707603579a3ccc1ae8cb795ad29c"
+    sha256 "d3ad9199b0eab4d05919f1d4f4809dc3b14ea3792c3b27ef3f69edb0e79738a2"
   end
 
   def install
