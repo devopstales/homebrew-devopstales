@@ -1,4 +1,4 @@
-class kubent < Formula
+class Kubent < Formula
   desc "Kube No Trouble (kubent) is a simple tool to check whether you're using any of these API versions in your cluster and therefore should upgrade your workloads first, before upgrading your Kubernetes cluster. "
   homepage "https://github.com/doitintl/kube-no-trouble"
   license "MIT"
