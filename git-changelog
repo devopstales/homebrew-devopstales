@@ -1,0 +1,131 @@
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+
+from git import Repo, Commit
+import sys
+
+repo = Repo('.')
+branch = repo.active_branch
+
+commits = list(repo.iter_commits(branch, max_count=1000))
+repo_name = repo.remotes.origin.url.split('.git')[0]
+if "@" in repo_name:
+    old_name = repo_name
+    repo_name = old_name.split('@')[1].replace(":", "/")
+
+# vars
+breaking = {
+    "msg": [],
+    "author": [],
+    "hash": [],
+}
+features = {
+    "msg": [],
+    "author": [],
+    "hash": [],
+}
+bugfix = {
+    "msg": [],
+    "author": [],
+    "hash": [],
+}
+changes = {
+    "msg": [],
+    "author": [],
+    "hash": [],
+}
+docs = {
+    "msg": [],
+    "author": [],
+    "hash": [],
+}
+
+for c in commits:
+    # Features
+    if c.message.startswith('brk') or c.message.startswith('breaking') or "!:" in c.message:
+        breaking["msg"] += [c.message.strip().split(': ')[-1]]
+        breaking["author"] += [str(c.author)]
+        breaking["hash"] += [repo.git.rev_parse(c.hexsha, short=8)]
+    # Features
+    if c.message.startswith('feature') or c.message.startswith('feat') or c.message.startswith('new'):
+        features["msg"] += [c.message.strip().split(': ')[-1]]
+        features["author"] += [str(c.author)]
+        features["hash"] += [repo.git.rev_parse(c.hexsha, short=8)]
+    # Bugfix
+    elif c.message.startswith('fix') or c.message.startswith('bugfix') or c.message.startswith('bug'):
+        bugfix["msg"] += [c.message.strip().split(': ')[-1]]
+        bugfix["author"] += [str(c.author)]
+        bugfix["hash"] += [repo.git.rev_parse(c.hexsha, short=8)]
+    # Changes
+    elif c.message.startswith('chnage') or c.message.startswith('refactor'):
+        changes["msg"] += [c.message.strip().split(': ')[-1]]
+        changes["author"] += [str(c.author)]
+        changes["hash"] += [repo.git.rev_parse(c.hexsha, short=8)]
+    # Docs
+    elif c.message.startswith('docs'):
+        docs["msg"] += [c.message.strip().split(': ')[-1]]
+        docs["author"] += [str(c.author)]
+        docs["hash"] += [repo.git.rev_parse(c.hexsha, short=8)]
+
+############################################
+# Print
+############################################
+
+length = len(breaking["msg"])
+if length > 0:
+    print("### ⚠️ BREAKING CHANGES ⚠️")
+    for i in range(0, length):
+        print("- " + "[```" + breaking["hash"][i] + "```](" + repo_name + "/commit/" + breaking["hash"][i] + ") "
+            + breaking["msg"][i] + " by " + "@" + breaking["author"][i])
+    print()
+    
+length = len(features["msg"])
+if length > 0:
+    print("### Features 🚀")
+    for i in range(0, length):
+        print("- " + "[```" + features["hash"][i] + "```](" + repo_name + "/commit/" + features["hash"][i] + ") "
+            + features["msg"][i] + " by " + "@" + features["author"][i])
+    print()
+
+length = len(bugfix["msg"])
+if length > 0:
+    print("### Bugfix 🐛")
+    for i in range(0, length):
+        print("- " + "[```" + bugfix["hash"][i] + "```](" + repo_name + "/commit/" + bugfix["hash"][i] + ") "
+            + bugfix["msg"][i] + " by " + "@" + bugfix["author"][i])
+    print()
+
+length = len(changes["msg"])
+if length > 0:
+    print("## Changes 🛠")
+    for i in range(0, length):
+        print("- " + "[```" + changes["hash"][i] + "```](" + repo_name + "/commit/" + changes["hash"][i] + ") "
+            + changes["msg"][i] + " by " + "@" + changes["author"][i])
+    print()
+
+length = len(docs["msg"])
+if length > 0:
+    print("### Documentation 📖")
+    for i in range(0, length):
+        print("- " + "[```" + docs["hash"][i] + "```](" + repo_name + "/commit/" + docs["hash"][i] + ") "
+            + docs["msg"][i] + " by " + "@" + docs["author"][i])
+    print()
+
+
+"""
+### BREAKING CHANGES
+chore!,
+
+
+
+
+* {MSG} by @{author}
+
+
+chnage,refactor
+
+
+docs
+
+
+"""
