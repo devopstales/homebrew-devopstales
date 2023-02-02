@@ -1,13 +1,29 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
+# GitPython==2.1.11
 from git import Repo, Commit
-import sys
+import sys, argparse
+
+#old_tag = "2.4.1"
+#new_tag = "2.5"
+
+parser = argparse.ArgumentParser(description='git-changelog')
+parser.add_argument('--old-tag', type=str, help='An earlier tag/commit hash to compare to.')
+parser.add_argument('--new-tag', type=str, help='A newer tag/commit hash to compare to.')
+
+options = parser.parse_args()
+old_tag = options.old_tag
+new_tag = options.new_tag
+
+############################################
+# Variables
+############################################
 
 repo = Repo('.')
 branch = repo.active_branch
+revision = old_tag + ".." + new_tag
 
-commits = list(repo.iter_commits(branch, max_count=1000))
 repo_name = repo.remotes.origin.url.split('.git')[0]
 if "@" in repo_name:
     old_name = repo_name
@@ -40,7 +56,7 @@ docs = {
     "hash": [],
 }
 
-for c in commits:
+for c in repo.iter_commits(rev=revision):
     # Features
     if c.message.startswith('brk') or c.message.startswith('breaking') or "!:" in c.message:
         breaking["msg"] += [c.message.strip().split(': ')[-1]]
@@ -78,7 +94,7 @@ if length > 0:
         print("- " + "[```" + breaking["hash"][i] + "```](" + repo_name + "/commit/" + breaking["hash"][i] + ") "
             + breaking["msg"][i] + " by " + "@" + breaking["author"][i])
     print()
-    
+
 length = len(features["msg"])
 if length > 0:
     print("### Features 🚀")
@@ -110,22 +126,3 @@ if length > 0:
         print("- " + "[```" + docs["hash"][i] + "```](" + repo_name + "/commit/" + docs["hash"][i] + ") "
             + docs["msg"][i] + " by " + "@" + docs["author"][i])
     print()
-
-
-"""
-### BREAKING CHANGES
-chore!,
-
-
-
-
-* {MSG} by @{author}
-
-
-chnage,refactor
-
-
-docs
-
-
-"""
