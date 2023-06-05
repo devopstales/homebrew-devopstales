@@ -6,6 +6,7 @@ brew install tmux-cssh
 brew install kubectl-login
 brew install kubent
 brew install git-user
+brew install git-changelog
 ```
 
 # <!-- project_table_start -->
