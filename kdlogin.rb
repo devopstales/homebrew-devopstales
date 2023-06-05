@@ -5,21 +5,21 @@
 class Kdlogin < Formula
   desc "kubectl-kdlogin is a kubectl plugin that can be used to easily enable authentication flows via OIDC for a kubernetes cluster."
   homepage "https://devopstales.github.io"
-  version "0.1"
+  version "2.0.0"
   license "Apache 2.0"
 
   on_macos do
     if Hardware::CPU.arm?
-      url "https://github.com/devopstales/KubeDash/releases/download/0.1/kubectl-kdlogin_Darwin_arm64.tar.gz"
-      sha256 "8e4928333842afa86e4cb78f3c197e5507ea32ec07bebc44d9a6edd29f42bae9"
+      url "https://github.com/devopstales/KubeDash/releases/download/2.0.0/kubectl-kdlogin_Darwin_arm64.tar.gz"
+      sha256 "7ff661f72ae30c45a2df2736974de57e636bbb77834593c402f9f12e49f2acaf"
 
       def install
         bin.install "kubectl-kdlogin"
       end
     end
     if Hardware::CPU.intel?
-      url "https://github.com/devopstales/KubeDash/releases/download/0.1/kubectl-kdlogin_Darwin_x86_64.tar.gz"
-      sha256 "7c350ae662bc190c0855d41169b3300c40338bf2d898ed9198059ef1b01cd5ba"
+      url "https://github.com/devopstales/KubeDash/releases/download/2.0.0/kubectl-kdlogin_Darwin_x86_64.tar.gz"
+      sha256 "30eee1eb75af2b86669c69bdebd69f857c023a217612af07971bc9937512147f"
 
       def install
         bin.install "kubectl-kdlogin"
@@ -29,16 +29,16 @@ class Kdlogin < Formula
 
   on_linux do
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/devopstales/KubeDash/releases/download/0.1/kubectl-kdlogin_Linux_arm64.tar.gz"
-      sha256 "196b4ce02eb7d3ec1819ecf50d7337c4d352a7073a15c74a078ab045868771a7"
+      url "https://github.com/devopstales/KubeDash/releases/download/2.0.0/kubectl-kdlogin_Linux_arm64.tar.gz"
+      sha256 "9e259a2d1d8d7d1b50ebdf3758b838da133fe36f88665e18cb64d8b7481008d9"
 
       def install
         bin.install "kubectl-kdlogin"
       end
     end
     if Hardware::CPU.intel?
-      url "https://github.com/devopstales/KubeDash/releases/download/0.1/kubectl-kdlogin_Linux_x86_64.tar.gz"
-      sha256 "422fdea934c75bc20222550f926c1ff3828d6035d897d3e1ad009d33fcfa50e0"
+      url "https://github.com/devopstales/KubeDash/releases/download/2.0.0/kubectl-kdlogin_Linux_x86_64.tar.gz"
+      sha256 "4b508bc147e46bb4e267c26df2cc7b2bb437bb303674cebca45e156d72ec4658"
 
       def install
         bin.install "kubectl-kdlogin"
