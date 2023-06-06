@@ -9,17 +9,17 @@ class Kdlogin < Formula
   license "Apache 2.0"
 
   on_macos do
-    if Hardware::CPU.intel?
-      url "https://github.com/devopstales/KubeDash/releases/download/2.0.0/kubectl-kdlogin_Darwin_x86_64.tar.gz"
-      sha256 "fe116f7fe7a1093183a1c1bb72326ec492585b6382090e3fd0b3c581f3940fd7"
+    if Hardware::CPU.arm?
+      url "https://github.com/devopstales/KubeDash/releases/download/2.0.0/kubectl-kdlogin_Darwin_arm64.tar.gz"
+      sha256 "40d15372801f1013bd83300be4e9d04de1b7021ac51a7c085a89f22337eb5cfd"
 
       def install
         bin.install "kubectl-kdlogin"
       end
     end
-    if Hardware::CPU.arm?
-      url "https://github.com/devopstales/KubeDash/releases/download/2.0.0/kubectl-kdlogin_Darwin_arm64.tar.gz"
-      sha256 "2724b2fa45584612b457298a3c0596b040aee0b1ec99cca2d48a8158fdc3eaeb"
+    if Hardware::CPU.intel?
+      url "https://github.com/devopstales/KubeDash/releases/download/2.0.0/kubectl-kdlogin_Darwin_x86_64.tar.gz"
+      sha256 "aab7f57c5dbce3f0514a8edeb4fb8c3d01fd521f68d1f51cf89cc8afaf6bc265"
 
       def install
         bin.install "kubectl-kdlogin"
@@ -28,17 +28,17 @@ class Kdlogin < Formula
   end
 
   on_linux do
-    if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/devopstales/KubeDash/releases/download/2.0.0/kubectl-kdlogin_Linux_arm64.tar.gz"
-      sha256 "c2adf1a54c9cd393fa8eae5659b174c4ce850a352a9a5de2033e8a347d53351b"
+    if Hardware::CPU.intel?
+      url "https://github.com/devopstales/KubeDash/releases/download/2.0.0/kubectl-kdlogin_Linux_x86_64.tar.gz"
+      sha256 "27aa48ed884c39096347da8d659a120d8bcbe96727f717533fe9d68b49c8294f"
 
       def install
         bin.install "kubectl-kdlogin"
       end
     end
-    if Hardware::CPU.intel?
-      url "https://github.com/devopstales/KubeDash/releases/download/2.0.0/kubectl-kdlogin_Linux_x86_64.tar.gz"
-      sha256 "88e3f5dc37091fcc0c3f2fd739c946e5113e5834f39a6f6d3dc202cff8dd9578"
+    if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
+      url "https://github.com/devopstales/KubeDash/releases/download/2.0.0/kubectl-kdlogin_Linux_arm64.tar.gz"
+      sha256 "7a2a8a390a2ccf5636533d32b6f852bd5b97b085c5842cf394394bb09bc02a08"
 
       def install
         bin.install "kubectl-kdlogin"
