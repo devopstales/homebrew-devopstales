@@ -11,7 +11,7 @@ class Kdlogin < Formula
   on_macos do
     if Hardware::CPU.intel?
       url "https://github.com/devopstales/KubeDash/releases/download/3.1.0/kubectl-kdlogin_Darwin_x86_64.tar.gz"
-      sha256 "b9310778f2cac71207fe25928abf4b9b54792ce495735f460b4f8f15c84ea645"
+      sha256 "0281cbcda5d89c83e79523be36ccf47c9ec83a335782d9da9d8dd107ef2e06fd"
 
       def install
         bin.install "kubectl-kdlogin"
@@ -19,7 +19,7 @@ class Kdlogin < Formula
     end
     if Hardware::CPU.arm?
       url "https://github.com/devopstales/KubeDash/releases/download/3.1.0/kubectl-kdlogin_Darwin_arm64.tar.gz"
-      sha256 "f13f6b51bc23468bcdbadc51cc25cd22eba903eb9219f9163634417015c19ffb"
+      sha256 "1fdeb043310367699be3fd63f6fc57ccfd8db61964ae5e7b9717c15b759fee4e"
 
       def install
         bin.install "kubectl-kdlogin"
@@ -31,7 +31,7 @@ class Kdlogin < Formula
     if Hardware::CPU.intel?
       if Hardware::CPU.is_64_bit?
         url "https://github.com/devopstales/KubeDash/releases/download/3.1.0/kubectl-kdlogin_Linux_x86_64.tar.gz"
-        sha256 "605b2b39e700756f436c5bb910e3c828145f018c085c722335f95b0955055dad"
+        sha256 "c830783c04311b069147eb6ba1d37e91232c55b71e32f5bbeadcd4b9c06bd2e8"
 
         def install
           bin.install "kubectl-kdlogin"
@@ -41,7 +41,7 @@ class Kdlogin < Formula
     if Hardware::CPU.arm?
       if Hardware::CPU.is_64_bit?
         url "https://github.com/devopstales/KubeDash/releases/download/3.1.0/kubectl-kdlogin_Linux_arm64.tar.gz"
-        sha256 "026c8cab1da412ab60b2080d75fd914fcf05af065b59b3b660ca005296584156"
+        sha256 "9ea34d8d41a59db8d92e06ed014b94316e9d15943be082efc70a98139971fab9"
 
         def install
           bin.install "kubectl-kdlogin"
